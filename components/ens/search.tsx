@@ -13,9 +13,9 @@ const parseTextArea = (text: string) => {
 export default function Search() {
   const provider = useProvider();
   const [textArea, setTextArea] = useState<string>("vitalik");
-  const [queriedNames, setQueriedNames] = useState<{ [name: string]: string }>(
-    {},
-  );
+  const [queriedNames, setQueriedNames] = useState<{ [name: string]: string }>({
+    "vitalik.eth": "Unavailable",
+  });
   const queryNames = parseTextArea(textArea);
   const [isTyping, setIsTyping] = useState(false);
 
@@ -27,7 +27,7 @@ export default function Search() {
           if (!provider) return console.error("Could not get provider!");
           resolveNames(queryNames);
         }
-      }, 500);
+      }, 100);
       console.log({ timer });
     }
   }, [isTyping]);
@@ -65,20 +65,20 @@ export default function Search() {
 
   return (
     <div className="relative w-full rounded-xl border border-gray-200 bg-white p-8 shadow-md">
-      <div className="grid grid-cols-7">
+      <div className="grid grid-cols-11">
         <textarea
-          className="col-span-4 whitespace-nowrap rounded-xl border-gray-300 focus:ring-0 focus:ring-offset-0"
+          className="col-span-5 whitespace-nowrap rounded-xl border-gray-300 focus:ring-0 focus:ring-offset-0"
           rows={10}
           cols={40}
           value={textArea}
           onChange={onTextAreaChange}
         ></textarea>
-        <div className="col-span-1 ml-2 pt-2">
+        <div className="col-span-3 ml-4 pt-2">
           {queryNames.map((name, idx) => (
             <p key={idx}>{name}</p>
           ))}
         </div>
-        <div className="col-span-1 ml-2 pt-2">
+        <div className="col-span-2 ml-2 pt-2">
           {queryNames.map((name, idx) => {
             const ensLink = `https://app.ens.domains/name/${name}/details`;
             return (
