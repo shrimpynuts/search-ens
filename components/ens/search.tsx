@@ -23,7 +23,7 @@ export default function Search({ query }: { query?: ReactNode }) {
     <div className="relative h-96 rounded-xl border border-gray-200 bg-white p-8 shadow-md">
       <button onClick={fetchNames}>Fetch Names</button>
       {queryNames.map((query, idx) => (
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-3" key={idx}>
           <div className="col-span-2">
             {idx}: {query}
           </div>
