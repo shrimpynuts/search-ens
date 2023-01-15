@@ -48,7 +48,7 @@ export default function Layout({
             <p>ENS Search</p>
           </Link>
           <div>
-            <AnimatePresence>
+            {/* <AnimatePresence>
               {!session && status !== "loading" ? (
                 <motion.button
                   className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
@@ -60,14 +60,14 @@ export default function Layout({
               ) : (
                 <UserDropdown />
               )}
-            </AnimatePresence>
+            </AnimatePresence> */}
           </div>
         </div>
       </div>
       <main className="flex w-screen flex-col items-center justify-center py-32">
         {children}
       </main>
-      <div className="absolute w-full border-t border-gray-200 bg-white py-5 text-center">
+      {/* <div className="absolute w-full border-t border-gray-200 bg-white py-5 text-center">
         <p className="text-gray-500">
           A free template by{" "}
           <a
@@ -79,7 +79,7 @@ export default function Layout({
             Steven Tey
           </a>
         </p>
-      </div>
+      </div> */}
     </>
   );
 }
