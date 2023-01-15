@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 import useScroll from "@/lib/hooks/use-scroll";
 import Meta from "./meta";
 import { useSignInModal } from "./sign-in-modal";
-import UserDropdown from "./user-dropdown";
+import Emoji from "../shared/emoji";
 
 export default function Layout({
   meta,
@@ -38,14 +38,13 @@ export default function Layout({
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
           <Link href="/" className="flex items-center font-display text-2xl">
-            <Image
-              src="/logo.png"
-              alt="Logo image of a chat bubble"
-              width="30"
-              height="30"
-              className="mr-2 rounded-sm"
-            ></Image>
-            <p>Search ENS</p>
+            <Emoji
+              className="cursor-pointer text-4xl "
+              label="logo"
+              symbol="🔍"
+            />
+
+            <p className="ml-2 font-bold">Search ENS</p>
           </Link>
           <div>
             {/* <AnimatePresence>

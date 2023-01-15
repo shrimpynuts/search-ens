@@ -1,8 +1,6 @@
 import Layout from "@/components/layout";
-import Balancer from "react-wrap-balancer";
 import { motion } from "framer-motion";
-import { FADE_DOWN_ANIMATION_VARIANTS } from "@/lib/constants";
-import { Twitter } from "@/components/shared/icons";
+import { Github, Twitter } from "@/components/shared/icons";
 
 import Search from "@/components/ens/search";
 
@@ -25,6 +23,22 @@ export default function Home() {
         }}
       >
         <Search />
+        <div className="relative mt-8 w-full rounded-xl border border-gray-200 bg-white p-8 shadow-md">
+          <h2 className="text-xl font-semibold">How does this work?</h2>
+          <p className="mt-2">
+            Each line in the textbox represents an ENS domain. As you list them,
+            each of their availability will popup on the right side.
+          </p>
+          <a
+            className="mt-4 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800"
+            href="https://github.com/steven-tey/precedent"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Github />
+            <p>View GitHub</p>
+          </a>
+        </div>
       </motion.div>
     </Layout>
   );

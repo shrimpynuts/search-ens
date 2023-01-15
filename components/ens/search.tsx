@@ -67,13 +67,13 @@ export default function Search() {
     <div className="relative w-full rounded-xl border border-gray-200 bg-white p-8 shadow-md">
       <div className="grid grid-cols-6">
         <textarea
-          className="col-span-3 whitespace-nowrap	"
+          className="col-span-4 whitespace-nowrap rounded-xl border-gray-300 focus:ring-0 focus:ring-offset-0"
           rows={10}
           cols={40}
           value={textArea}
           onChange={onTextAreaChange}
         ></textarea>
-        <div className="col-span-2 ml-2 pt-2">
+        <div className="col-span-1 ml-2 pt-2">
           {queryNames.map((name, idx) => (
             <p key={idx}>{name}</p>
           ))}
