@@ -32,14 +32,22 @@ export default function Search() {
     }
   }, [isTyping]);
 
+  const isValidName = (name: string) => name.length >= 3;
+
   const resolveNames = async (names: string[]) => {
-    const namesToFetch = names.filter((name) => !(name in queriedNames));
+    const namesToFetch = names
+      .filter((name) => !(name in queriedNames))
+      .filter(isValidName);
     console.log(`Fetching ${namesToFetch.length} names!`);
     return await Promise.all(
       namesToFetch.map((name) =>
         provider.resolveName(name).then((result) => {
           setQueriedNames((prev) => {
-            const status = result ? "Unavailable" : "Available";
+            const status = isValidName(name)
+              ? result
+                ? "Unavailable"
+                : "Available"
+              : "Invalid";
             const obj = { ...prev, [name]: status };
             return obj;
           });
@@ -57,21 +65,20 @@ export default function Search() {
 
   return (
     <div className="relative w-full rounded-xl border border-gray-200 bg-white p-8 shadow-md">
-      {/* <button onClick={fetchNames}>Fetch Names</button> */}
-      <div className="grid grid-cols-5">
+      <div className="grid grid-cols-6">
         <textarea
           className="col-span-3 whitespace-nowrap	"
           rows={10}
-          cols={50}
+          cols={40}
           value={textArea}
           onChange={onTextAreaChange}
         ></textarea>
-        <div className="pt-2 pl-2">
+        <div className="col-span-2 ml-2 pt-2">
           {queryNames.map((name, idx) => (
             <p key={idx}>{name}</p>
           ))}
         </div>
-        <div className="pt-2 pl-2">
+        <div className="ml-2 pt-2">
           {queryNames.map((name, idx) => {
             const ensLink = `https://app.ens.domains/name/${name}/details`;
             return (
