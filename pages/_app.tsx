@@ -7,6 +7,8 @@ import { Provider as RWBProvider } from "react-wrap-balancer";
 import cx from "classnames";
 import localFont from "@next/font/local";
 import { Inter } from "@next/font/google";
+import { WagmiConfig, createClient, configureChains, mainnet } from "wagmi";
+import { publicProvider } from "wagmi/providers/public";
 
 const sfPro = localFont({
   src: "../styles/SF-Pro-Display-Medium.otf",
@@ -18,6 +20,17 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const { provider, webSocketProvider } = configureChains(
+  [mainnet],
+  [publicProvider()],
+);
+
+const client = createClient({
+  autoConnect: true,
+  provider,
+  webSocketProvider,
+});
+
 export default function MyApp({
   Component,
   pageProps: { session, ...pageProps },
@@ -25,9 +38,11 @@ export default function MyApp({
   return (
     <SessionProvider session={session}>
       <RWBProvider>
-        <main className={cx(sfPro.variable, inter.variable)}>
-          <Component {...pageProps} />
-        </main>
+        <WagmiConfig client={client}>
+          <main className={cx(sfPro.variable, inter.variable)}>
+            <Component {...pageProps} />
+          </main>
+        </WagmiConfig>
       </RWBProvider>
       <Analytics />
     </SessionProvider>
