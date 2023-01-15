@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useProvider } from "wagmi";
 
 const parseTextArea = (text: string) => {
@@ -12,7 +12,7 @@ const parseTextArea = (text: string) => {
 
 export default function Search() {
   const provider = useProvider();
-  const [textArea, setTextArea] = useState<string>("vitalik");
+  const [textArea, setTextArea] = useState<string>("vitalik\n");
   const [queriedNames, setQueriedNames] = useState<{ [name: string]: string }>({
     "vitalik.eth": "Unavailable",
   });
@@ -58,10 +58,15 @@ export default function Search() {
 
   const onTextAreaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setTextArea(event.target.value);
-    if (!isTyping) {
-      setIsTyping(true);
-    }
+    if (!isTyping) setIsTyping(true);
   };
+
+  const textAreaInput = useCallback((inputElement: any) => {
+    if (inputElement) {
+      inputElement.focus();
+      inputElement.selectionStart = inputElement.value.length;
+    }
+  }, []);
 
   return (
     <div className="relative w-full rounded-xl border border-gray-200 bg-white p-8 shadow-md">
@@ -72,7 +77,9 @@ export default function Search() {
           cols={40}
           value={textArea}
           onChange={onTextAreaChange}
-        ></textarea>
+          autoFocus
+          ref={textAreaInput}
+        />
         <div className="col-span-3 ml-4 pt-2">
           {queryNames.map((name, idx) => (
             <p key={idx}>{name}</p>
@@ -80,7 +87,6 @@ export default function Search() {
         </div>
         <div className="col-span-2 ml-2 pt-2">
           {queryNames.map((name, idx) => {
-            const ensLink = `https://app.ens.domains/name/${name}/details`;
             return (
               <p
                 key={idx}
