@@ -3,7 +3,7 @@ import Head from "next/head";
 const DOMAIN = "https://precedent.vercel.app";
 
 export default function Meta({
-  title = "ENS Search",
+  title = "Search ENS",
   description = "Find available ENS domains in bulk.",
   image = `${DOMAIN}/api/og`,
 }: {
