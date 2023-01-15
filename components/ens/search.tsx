@@ -5,7 +5,7 @@ const parseTextArea = (text: string) => {
   const lines = text.split("\n");
   const noWhitespaceLines = lines.map((line) => line.replace(/\s/g, ""));
   const dotEthAppended = noWhitespaceLines.map((line) =>
-    line.length > 3 ? `${line}.eth` : "",
+    line.length >= 3 ? `${line}.eth` : "",
   );
   return dotEthAppended;
 };
