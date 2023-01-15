@@ -65,7 +65,7 @@ export default function Search() {
 
   return (
     <div className="relative w-full rounded-xl border border-gray-200 bg-white p-8 shadow-md">
-      <div className="grid grid-cols-6">
+      <div className="grid grid-cols-7">
         <textarea
           className="col-span-4 whitespace-nowrap rounded-xl border-gray-300 focus:ring-0 focus:ring-offset-0"
           rows={10}
@@ -78,22 +78,37 @@ export default function Search() {
             <p key={idx}>{name}</p>
           ))}
         </div>
-        <div className="ml-2 pt-2">
+        <div className="col-span-1 ml-2 pt-2">
+          {queryNames.map((name, idx) => {
+            const ensLink = `https://app.ens.domains/name/${name}/details`;
+            return (
+              <p
+                key={idx}
+                className={`font-semi-bold ${
+                  queriedNames[name] === "Available"
+                    ? "text-green-500"
+                    : "text-red-500"
+                }`}
+              >
+                {queriedNames[name]}
+              </p>
+            );
+          })}
+        </div>
+        <div className="col-span-1 ml-2 pt-2">
           {queryNames.map((name, idx) => {
             const ensLink = `https://app.ens.domains/name/${name}/details`;
             return (
               <p key={idx}>
                 <a
-                  className={`${
-                    queriedNames[name] === "Available"
-                      ? "text-green-500"
-                      : "text-red-500"
-                  }`}
+                  className={`text-blue-600`}
                   href={ensLink}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {queriedNames[name]}
+                  {queriedNames[name] &&
+                    queriedNames[name] !== "Invalid" &&
+                    "link"}
                 </a>
               </p>
             );

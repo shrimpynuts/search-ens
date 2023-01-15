@@ -26,8 +26,10 @@ export default function Home() {
         <div className="relative mt-8 w-full rounded-xl border border-gray-200 bg-white p-8 shadow-md">
           <h2 className="text-xl font-semibold">How does this work?</h2>
           <p className="mt-2">
-            Each line in the textbox represents an ENS domain. As you list them,
-            each of their availability will popup on the right side.
+            Each line in the textbox represents an ENS (Ethereum Name Service)
+            domain. As you list them, each of their availability will popup on
+            the right side, along with a link to where you can view its
+            registration details.
           </p>
           <a
             className="mt-4 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800"
